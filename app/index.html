@@ -9,46 +9,98 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="../bower_components/hint/hint/dist/hint.min.css" />
+    <link rel="stylesheet" href="../bower_components/hint/dist/hint.min.css" />
+    <link rel="stylesheet" href="../bower_components/jquery-ui/themes/base/jquery-ui.min.css" />
+    <link rel="stylesheet" href="../bower_components/urank/urank/css/urank.css" />
+    <link rel="stylesheet" href="../bower_components/urank/urank/css/vis-ranking.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
-    <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->
     <!-- endbuild -->
+
+      <!-- src:css -->
+      <!-- endsrc -->
 
   </head>
   <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
 
-    <div class="hero-unit">
-      <h1>'Allo, 'Allo!</h1>
-      <p>You now have</p>
-      <ul>
-      <li>HTML5 Boilerplate</li>
+    <header>                            <!-- top panel -->
+        <select id="select-dataset"></select>
+    </header>
 
-      <li>Modernizr</li>
-      </ul>
+    <div class="main-panel">
+        <div id="tagcloud"></div>       <!-- left panel -->
+            <div class="central-panel">     <!-- central panel, including list and ranking -->
+                <div class="control-panel">
+                    <div class="ranking-controls">
+                        <button id="btn-reset" title="Reset">
+                            <span class="sprite-reset"></span>
+                        </button>
+                        <button id="btn-sort-by-overall-score" title="Sort by overall score">
+                            <span class="sprite-sort-down"></span>
+                        </button>
+                        <button id="btn-sort-by-max-score" title="Sort by maximum score">
+                            <span class="sprite-wiggle"></span>
+                        </button>
+                    </div>
+
+                    <div id="tagbox"></div>
+                </div>
+
+                <div class="vis-panel">
+                    <div id="contentlist" ></div>
+                    <div id="viscanvas"></div>
+                </div>
+            </div>
+        <div id="docviewer"></div>      <!-- right panel -->
+
     </div>
 
+    <div class="processing-message">Processing Data...</div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/modernizr/modernizr.js"></script>
-    <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="../bower_components/colorbrewer/colorbrewer.js"></script>
     <script src="../bower_components/d3/d3.js"></script>
     <script src="../bower_components/d3pie/d3pie/d3pie.min.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="../bower_components/urank/urank.js"></script>
+    <script src="../bower_components/urank/urank/libs/natural-custom.js"></script>
+    <script src="../bower_components/urank/urank/libs/pos/lexer.js"></script>
+    <script src="../bower_components/urank/urank/libs/pos/lexicon.js"></script>
+    <script src="../bower_components/urank/urank/libs/pos/pos.js"></script>
+    <script src="../bower_components/urank/urank/libs/pos/POSTagger.js"></script>
+    <script src="../bower_components/urank/urank/model/keywordExtractor.js"></script>
+    <script src="../bower_components/urank/urank/model/rankingArray.js"></script>
+    <script src="../bower_components/urank/urank/model/rankingModel.js"></script>
+    <script src="../bower_components/urank/urank/blocks/contentList.js"></script>
+    <script src="../bower_components/urank/urank/blocks/docViewer.js"></script>
+    <script src="../bower_components/urank/urank/blocks/tagBox.js"></script>
+    <script src="../bower_components/urank/urank/blocks/tagCloud.js"></script>
+    <script src="../bower_components/urank/urank/'blocks/visCanvas.js"></script>
+    <script src="../bower_components/urank/urank/vis/ranking.js"></script>
+    <script src="../bower_components/urank/urank/helper/globals.js"></script>
+    <script src="../bower_components/urank/urank/helper/settings.js"></script>
+    <script src="../bower_components/urank/urank/helper/utils.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/outerHTML.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/scrollTo.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/fullOffset.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/fullWidth.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/fullHeight.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/getText.js"></script>
+    <script src="../bower_components/urank/urank/helper/jquery_functions/pin.js"></script>
+    <script src="../bower_components/urank/urank/urank-controller.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+    <!-- src:js -->
+    <!-- endsrc -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -60,8 +112,9 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/datasetManager.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

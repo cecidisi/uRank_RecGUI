@@ -19,6 +19,7 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
+    libs: 'app/libs',
     dist: 'dist'
   };
 
@@ -165,6 +166,20 @@ module.exports = function (grunt) {
       app: {
        //ignorePath: /^\/|\.\.\//,
         src: ['<%= config.app %>/index.html']
+      },
+      urank: {
+        src: ['<%= config.app %>/index.html'],
+        overrides: {
+            hint: {
+                main: "dist/hint.min.css"
+            },
+            'jquery-ui': {
+                main: [
+                    "jquery-ui.min.js",
+                    "themes/base/jquery-ui.min.css"
+                ]
+            }
+        }
       }
     },
 
@@ -336,7 +351,114 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
-    }
+    },
+    bowercopy: {
+        options: {
+            srcPrefix: 'bower_components'
+        },
+        urank: {
+            options: {
+                clean: false,
+                destPrefix: '<%= config.app %>/libs'
+            },
+            files: {
+                'urank': 'urank',
+                'urank/dependencies/colorbrewer.js': 'colorbrewer/colorbrewer.js',
+                'urank/dependencies/d3.min.js': 'd3/d3.min.js',
+                'urank/dependencies/d3pie.min.js': 'd3pie/d3pie/d3pie.min.js',
+                'urank/dependencies/hint.min.css': 'hint/dist/hint.min.css',
+                'urank/dependencies/jquery.min.js': 'jquery/dist/jquery.min.js',
+                'urank/dependencies/jquery-ui.min.js': 'jquery-ui/jquery-ui.min.js',
+                'urank/dependencies/theme/jquery-ui.min.css': 'jquery-ui/themes/base/jquery-ui.min.css',
+                'urank/dependencies/theme/images': 'jquery-ui/themes/base/images',
+                'urank/dependencies/underscore.min.js': 'underscore/underscore-min.js'
+            }
+        }
+    }/*,
+    includeSource: {
+        urank: {
+            options: {
+
+            },
+            src: ['<%= config.app %>/index.html'],
+            files: [
+                        '<%= config.libs %>/urank/dependencies/hint.min.css',
+                        '<%= config.libs %>/urank/dependencies/theme/jquery-ui.min.css',
+                        '<%= config.libs %>/urank/libs/natural-custom.js',
+                        '<%= config.libs %>/urank/libs/pos/lexer.js',
+                        '<%= config.libs %>/urank/libs/pos/lexicon.js',
+                        '<%= config.libs %>/urank/libs/pos/pos.js',
+                        '<%= config.libs %>/urank/libs/pos/POSTagger.js',
+                        '<%= config.libs %>/urank/model/keywordExtractor.js',
+                        '<%= config.libs %>/urank/model/rankingArray.js',
+                        '<%= config.libs %>/urank/model/rankingModel.js',
+                        '<%= config.libs %>/urank/blocks/contentList.js',
+                        '<%= config.libs %>/urank/blocks/docViewer.js',
+                        '<%= config.libs %>/urank/blocks/tagBox.js',
+                        '<%= config.libs %>/urank/blocks/tagCloud.js',
+                        '<%= config.libs %>/urank/blocks/visCanvas.js',
+                        '<%= config.libs %>/urank/vis/ranking.js',
+                        '<%= config.libs %>/urank/helper/globals.js',
+                        '<%= config.libs %>/urank/helper/settings.js',
+                        '<%= config.libs %>/urank/helper/utils.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/outerHTML.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/scrollTo.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullOffset.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullWidth.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullHeight.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/getText.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/pin.js',
+                        '<%= config.libs %>/urank/css/urank.css',
+                        '<%= config.libs %>/urank/css/vis-ranking.css',
+                        '<%= config.libs %>/urank/urank-controller.js',
+                        '<%= config.libs %>/urank/urank.js',
+                        '<%= config.libs %>/urank/css/urank.css',
+                        '<%= config.libs %>/urank/css/vis-ranking.css'
+                    ]
+            scope: {
+                js: {
+                    includes: [
+                        '<%= config.libs %>/urank/dependencies/hint.min.css',
+                        '<%= config.libs %>/urank/dependencies/theme/jquery-ui.min.css',
+                        '<%= config.libs %>/urank/libs/natural-custom.js',
+                        '<%= config.libs %>/urank/libs/pos/lexer.js',
+                        '<%= config.libs %>/urank/libs/pos/lexicon.js',
+                        '<%= config.libs %>/urank/libs/pos/pos.js',
+                        '<%= config.libs %>/urank/libs/pos/POSTagger.js',
+                        '<%= config.libs %>/urank/model/keywordExtractor.js',
+                        '<%= config.libs %>/urank/model/rankingArray.js',
+                        '<%= config.libs %>/urank/model/rankingModel.js',
+                        '<%= config.libs %>/urank/blocks/contentList.js',
+                        '<%= config.libs %>/urank/blocks/docViewer.js',
+                        '<%= config.libs %>/urank/blocks/tagBox.js',
+                        '<%= config.libs %>/urank/blocks/tagCloud.js',
+                        '<%= config.libs %>/urank/blocks/visCanvas.js',
+                        '<%= config.libs %>/urank/vis/ranking.js',
+                        '<%= config.libs %>/urank/helper/globals.js',
+                        '<%= config.libs %>/urank/helper/settings.js',
+                        '<%= config.libs %>/urank/helper/utils.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/outerHTML.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/scrollTo.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullOffset.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullWidth.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/fullHeight.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/getText.js',
+                        '<%= config.libs %>/urank/helper/jquery_functions/pin.js',
+                        '<%= config.libs %>/urank/css/urank.css',
+                        '<%= config.libs %>/urank/css/vis-ranking.css',
+                        '<%= config.libs %>/urank/urank-controller.js',
+                        '<%= config.libs %>/urank/urank.js'
+                    ]
+                },
+                css: {
+                    includes: [
+                        '<%= config.libs %>/urank/css/urank.css',
+                        '<%= config.libs %>/urank/css/vis-ranking.css'
+                    ]
+                }
+            }
+        }
+    }*/
   });
 
 
@@ -398,5 +520,12 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('urank', [
+      'bowercopy:urank',
+      'wiredep:urank',
+      'usemin'
+      //'srcInstall:urank'
   ]);
 };
